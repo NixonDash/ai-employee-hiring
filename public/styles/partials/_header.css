@@ -1,15 +1,7 @@
 /* public/styles/partials/_header.css */
-header {
-  background-color: #333;
-  padding: 1rem;
-}
+/* ... other existing styles ... */
 
 header nav a {
-  color: #fff;
-  margin-right: 1rem;
-  text-decoration: none;
-}
-
-header nav a:hover {
-  text-decoration: underline;
+  /* ... other existing styles ... */
+  transition: text-decoration 0.3s;
 }
