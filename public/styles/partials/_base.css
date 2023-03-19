@@ -1,5 +1,26 @@
 /* public/styles/partials/_base.css */
-/* ... other existing styles ... */
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+}
+
+main {
+  padding: 2rem;
+}
+
+h1 {
+  font-size: 2rem;
+}
+
+h2 {
+  font-size: 1.5rem;
+}
+
+p {
+  margin-bottom: 1rem;
+}
 
 /* Add this media query */
 @media (max-width: 768px) {
