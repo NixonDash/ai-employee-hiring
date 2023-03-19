@@ -1,15 +1,31 @@
-// pages/ai-employees.js
 import { useState, useEffect } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 
-const AIEmployees = () => {
-  const [aiEmployees, setAIEmployees] = useState([]);
+export default function AIEmployees() {
+  const [employees, setEmployees] = useState([]);
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch('/api/ai-employees')
-      .then((response) => response.json())
-      .then((data) => setAIEmployees(data));
+    const fetchData = async () => {
+      try {
+        setLoading(true);
+        const res = await fetch('/api/ai-employees');
+        if (!res.ok) {
+          throw new Error(`An error occurred: ${res.statusText}`);
+        }
+        const data = await res.json();
+        setEmployees(data);
+      } catch (error) {
+        console.error('Error fetching AI employees:', error);
+        setError(error.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
   }, []);
 
   return (
@@ -17,17 +33,19 @@ const AIEmployees = () => {
       <Header />
       <main>
         <h1>AI Employees</h1>
-        <ul>
-          {aiEmployees.map((employee) => (
-            <li key={employee.id}>
-              {employee.name} - {employee.industry}
-            </li>
-          ))}
-        </ul>
+        {loading ? (
+          <p>Loading...</p>
+        ) : error ? (
+          <p>Error: {error}</p>
+        ) : (
+          <ul>
+            {employees.map((employee) => (
+              <li key={employee.id}>{employee.name}</li>
+            ))}
+          </ul>
+        )}
       </main>
       <Footer />
     </div>
   );
-};
-
-export default AIEmployees;
+}
