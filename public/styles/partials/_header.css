@@ -1,7 +1,13 @@
 /* public/styles/partials/_header.css */
 /* ... other existing styles ... */
 
-header nav a {
-  /* ... other existing styles ... */
-  transition: text-decoration 0.3s;
+/* Add this media query */
+@media (max-width: 768px) {
+  header {
+    flex-direction: column;
+  }
+
+  header nav {
+    margin-top: 1rem;
+  }
 }
