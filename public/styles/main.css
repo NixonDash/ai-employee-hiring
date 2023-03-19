@@ -1,1 +1,4 @@
-
+/* public/styles/main.css */
+@import './partials/_base.css';
+@import './partials/_header.css';
+@import './partials/_footer.css';
