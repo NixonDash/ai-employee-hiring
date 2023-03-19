@@ -1,6 +1,6 @@
-import Header from '../components/Header';
-import Footer from '../components/Footer';
-import ContactUs from '../components/ContactUs';
+const Header = require('../components/Header');
+const Footer = require('../components/Footer');
+const ContactUs = require('../components/ContactUs');
 
 const Contact = () => {
   return (
@@ -12,4 +12,4 @@ const Contact = () => {
   );
 };
 
-export default Contact;
+module.exports = Contact;
