@@ -1,20 +1,24 @@
 {
   "name": "ai-employee-hiring",
   "version": "1.0.0",
+  "description": "A website where you can hire AI employees for your business",
+  "main": "index.js",
   "scripts": {
-    "dev": "next",
+    "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "test": "jest"
   },
   "dependencies": {
-    "next": "^12.0.0",
-    "react": "^17.0.0",
-    "react-dom": "^17.0.0",
-    "express": "^4.17.1",
-    "pg": "^8.7.1",
-    "stripe": "^8.194.0"
+    "next": "latest",
+    "react": "latest",
+    "react-dom": "latest",
+    ...
   },
   "devDependencies": {
-    "nodemon": "^2.0.15"
+    "jest": "latest",
+    "@testing-library/react": "latest",
+    "@testing-library/jest-dom": "latest",
+    ...
   }
 }
