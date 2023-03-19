@@ -1,32 +1,24 @@
-import { useState, useEffect } from 'react';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
+import React, { useState, useEffect } from "react";
 
-export default function AIEmployees() {
-  // State variables for employees, error, and loading
-  const [employees, setEmployees] = useState([]);
+const AIEmployees = () => {
+  const [data, setData] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  // Fetch AI employees data on component mount
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // Set loading state to true before API call
-        setLoading(true);
-        const res = await fetch('/api/ai-employees');
-        if (!res.ok) {
-          // Throw an error if the response is not ok
-          throw new Error(`An error occurred: ${res.statusText}`);
+        const response = await fetch("https://api.example.com/ai-employees");
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
         }
-        const data = await res.json();
-        setEmployees(data);
+
+        const data = await response.json();
+        setData(data);
+        setLoading(false);
       } catch (error) {
-        // Handle errors and set error state
-        console.error('Error fetching AI employees:', error);
         setError(error.message);
-      } finally {
-        // Set loading state to false after API call is complete
         setLoading(false);
       }
     };
@@ -34,27 +26,22 @@ export default function AIEmployees() {
     fetchData();
   }, []);
 
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
+
   return (
     <div>
-      <Header />
-      <main>
-        <h1>AI Employees</h1>
-        {loading ? (
-          // Display loading message if loading state is true
-          <p>Loading...</p>
-        ) : error ? (
-          // Display error message if error state is not null
-          <p>Error: {error}</p>
-        ) : (
-          // Display list of AI employees if there's no error and loading is complete
-          <ul>
-            {employees.map((employee) => (
-              <li key={employee.id}>{employee.name}</li>
-            ))}
-          </ul>
-        )}
-      </main>
-      <Footer />
+      <h1>AI Employees</h1>
+      {data.map((employee) => (
+        <div key={employee.id}>{employee.name}</div>
+      ))}
     </div>
   );
-}
+};
+
+export default AIEmployees;
